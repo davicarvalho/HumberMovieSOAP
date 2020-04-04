@@ -27,13 +27,11 @@ import models.TvShow;
 public class TvShowWebService {
 
       @WebMethod(operationName = "addTvShow")
-    public TvShow addTvShow(@WebParam(name = "name") String name) {
+    public TvShow addTvShow(TvShow show) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("DB");
         TvShowJpaController repo = new TvShowJpaController(emf);
-        TvShow tvShow = new TvShow();
-        tvShow.setTitle(name);
-        repo.create(tvShow);
-        return tvShow;
+        repo.create(show);
+        return show;
     }
     
     @WebMethod(operationName = "findTvShow")
@@ -51,12 +49,16 @@ public class TvShowWebService {
     }
     
     @WebMethod(operationName = "updateTvShow")
-    public TvShow updateTvShow(@WebParam(name = "id") Integer id, @WebParam(name = "name") String name) {
+    public TvShow updateTvShow(@WebParam(name = "show") TvShow show) {
         try {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("DB");
             TvShowJpaController repo = new TvShowJpaController(emf);
-            TvShow tvShow = repo.findTvShow(id);
-            tvShow.setTitle(name);
+            TvShow tvShow = repo.findTvShow(show.getId());
+            
+            tvShow.setGenreid(show.getGenreid());
+            tvShow.setTitle(show.getTitle());
+            tvShow.setYearEnd(show.getYearEnd());
+            tvShow.setYearStart(show.getYearStart());
             repo.edit(tvShow);
             return tvShow;
         } catch (Exception ex) {
