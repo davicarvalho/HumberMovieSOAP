@@ -39,6 +39,13 @@ public class EpisodeWebService {
         return repo.findEpisode(id);
     }
     
+      @WebMethod(operationName = "findEpisodeBySeason")
+    public List<Episode> findEpisodeBySeason(@WebParam(name = "id") Integer seasonId) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DB");
+        EpisodeJpaController repo = new EpisodeJpaController(emf);
+        return repo.findEpisodeBySeason(seasonId);
+    }
+    
     @WebMethod(operationName = "listEpisodes")
     public List<Episode> listEpisodes() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("DB");

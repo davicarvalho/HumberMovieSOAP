@@ -46,6 +46,14 @@ public class SeasonWebService {
         return repo.findSeasonEntities();
     }
     
+     @WebMethod(operationName = "findSeasonsByShow")
+    public List<Season> findSeasonsByShow(@WebParam(name = "id") Integer showId) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DB");
+        SeasonJpaController repo = new SeasonJpaController(emf);
+        
+        return repo.findSeasonsByShow(showId);
+    }
+    
     @WebMethod(operationName = "updateSeason")
     public Season updateSeason(@WebParam(name = "name") Season s) {
         try {

@@ -7,7 +7,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import models.Genre;
 import models.Season;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-03-04T18:08:27")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-04-05T13:46:45")
 @StaticMetamodel(TvShow.class)
 public class TvShow_ { 
 

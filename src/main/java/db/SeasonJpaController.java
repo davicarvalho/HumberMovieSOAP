@@ -34,6 +34,22 @@ public class SeasonJpaController implements Serializable {
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
+    
+    public List<Season> findSeasonsByShow(Integer showId){
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            List<Season> seasons = em.createQuery(
+                "SELECT s FROM Season s WHERE s.showid.id = :p")
+                .setParameter("p", showId)
+                .getResultList();
+            
+            return seasons;
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     public void create(Season season) {
         if (season.getEpisodeCollection() == null) {

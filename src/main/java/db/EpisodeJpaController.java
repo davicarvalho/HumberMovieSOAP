@@ -164,5 +164,21 @@ public class EpisodeJpaController implements Serializable {
             em.close();
         }
     }
+
+    public List<Episode> findEpisodeBySeason(Integer seasonId) {
+         EntityManager em = null;
+        try {
+            em = getEntityManager();
+            List<Episode> eps = em.createQuery(
+                "SELECT e FROM Episode e WHERE e.seasonid.id = :p")
+                .setParameter("p", seasonId)
+                .getResultList();
+            
+            return eps;
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
     
 }
